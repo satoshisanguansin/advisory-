@@ -13,13 +13,26 @@
     <style>
       body {
         font-family: 'Kanit', sans-serif;
-        background-color: #212529;
-        background-image: radial-gradient(circle at 10% 20%, rgba(245, 130, 32, 0.15), transparent 40%),
-                          radial-gradient(circle at 90% 80%, rgba(0, 200, 200, 0.1), transparent 40%);
+        color: #e5e7eb; /* A slightly lighter default text color */
+        background-color: #1a1d21;
+        background: linear-gradient(-45deg, #1a1d21, #212529, #2c3137, #212529);
+        background-size: 400% 400%;
+        animation: gradientBG 25s ease infinite;
         background-attachment: fixed;
+        line-height: 1.7;
       }
       #root {
         animation: fadeInAnimation 0.5s ease-in-out;
+      }
+      /* Global transition for smoother interactions */
+      * {
+        transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+      }
+
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
       }
       @keyframes fadeInAnimation {
           from { opacity: 0; transform: translateY(10px); }
@@ -51,7 +64,10 @@
     "idb": "https://esm.sh/idb@8.0.0",
     "chart.js": "https://esm.sh/chart.js@^4.4.3",
     "react-chartjs-2": "https://esm.sh/react-chartjs-2@^5.2.0",
-    "react-dom": "https://esm.sh/react-dom@^18.3.1"
+    "react-dom": "https://esm.sh/react-dom@^18.3.1",
+    "firebase/app": "https://esm.sh/firebase@10.12.2/app",
+    "firebase/firestore": "https://esm.sh/firebase@10.12.2/firestore",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.3.0/"
   }
 }
 </script>

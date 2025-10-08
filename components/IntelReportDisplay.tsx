@@ -5,7 +5,8 @@ import { useAuth } from '../contexts/AuthContext';
 import ExportButton from './ExportButton';
 import { generateMarkdownForIntelReport, generateMarkdownForMethodology } from '../utils/exportUtils';
 import NetworkGraph from './shared/NetworkGraph';
-import { FurtherInvestigation } from './shared/FurtherInvestigation';
+// FIX: Changed the named import to a default import as 'FurtherInvestigation' is a default export.
+import FurtherInvestigation from './shared/FurtherInvestigation';
 import Card from './shared/Card';
 import DiscussionThread from './shared/DiscussionThread';
 
@@ -45,7 +46,7 @@ const MethodologyDisplay: React.FC<{ methodology: MethodologyReport }> = ({ meth
             defaultClosed={true}
             onExport={handleExport}
         >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
                 <div>
                     <h4 className="font-bold text-white mb-2">ระดับความเชื่อมั่น: <span className="text-cyan-400">{methodology.confidenceLevel.score}/100</span></h4>
                     <p className="text-xs italic text-gray-400 mb-4">{methodology.confidenceLevel.rationale}</p>
@@ -106,9 +107,9 @@ const IntelReportDisplay: React.FC<IntelReportDisplayProps> = ({ report: initial
   }, [report, user]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
-        <h2 className="text-2xl font-bold text-white">แฟ้มข้อมูลข่าวกรองไซเบอร์: <span className="text-cyan-400">{report.profile.name}</span></h2>
+        <h2 className="text-3xl font-bold text-white">แฟ้มข้อมูลข่าวกรองไซเบอร์: <span className="text-cyan-400">{report.profile.name}</span></h2>
         <div className="flex items-center space-x-2">
             <ExportButton onExport={handleExport} />
             <button onClick={onClear} className="flex items-center space-x-2 px-3 py-1.5 bg-gray-600/50 hover:bg-gray-600 text-gray-300 hover:text-white rounded-md text-xs font-semibold transition-colors">
@@ -120,8 +121,8 @@ const IntelReportDisplay: React.FC<IntelReportDisplayProps> = ({ report: initial
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-8">
            <Card title="บทสรุปสำหรับผู้บริหาร">
                 <p>{report.executiveSummary}</p>
             </Card>
@@ -133,12 +134,42 @@ const IntelReportDisplay: React.FC<IntelReportDisplayProps> = ({ report: initial
                 <p>{report.riskAssessment.justification}</p>
             </Card>
         </div>
-        <div className="lg:col-span-1 space-y-6">
+        <div className="lg:col-span-1 space-y-8">
             <Card title="ข้อมูลบุคคล">
-                <p><strong>ตำแหน่ง:</strong> {report.profile.titles.join(', ')}</p>
-                <p><strong>ชื่ออื่น:</strong> {report.profile.aliases.join(', ')}</p>
-                <p><strong>บริษัทที่เกี่ยวข้อง:</strong> {report.profile.associatedCompanies.join(', ')}</p>
-                <p><strong>สถานที่ที่รู้จัก:</strong> {report.profile.knownLocations.join('; ')}</p>
+                <div className="space-y-4 text-sm">
+                    {report.profile.titles?.length > 0 && (
+                        <div>
+                            <strong className="block font-semibold text-gray-200">ตำแหน่ง:</strong>
+                            <ul className="list-disc list-outside pl-5 mt-1 text-gray-300 space-y-1">
+                                {report.profile.titles.map((title, i) => <li key={i}>{title}</li>)}
+                            </ul>
+                        </div>
+                    )}
+                    {report.profile.aliases?.length > 0 && (
+                        <div>
+                            <strong className="block font-semibold text-gray-200">ชื่ออื่น:</strong>
+                            <ul className="list-disc list-outside pl-5 mt-1 text-gray-300 space-y-1">
+                                {report.profile.aliases.map((alias, i) => <li key={i}>{alias}</li>)}
+                            </ul>
+                        </div>
+                    )}
+                    {report.profile.associatedCompanies?.length > 0 && (
+                        <div>
+                            <strong className="block font-semibold text-gray-200">บริษัทที่เกี่ยวข้อง:</strong>
+                            <ul className="list-disc list-outside pl-5 mt-1 text-gray-300 space-y-1">
+                                {report.profile.associatedCompanies.map((company, i) => <li key={i}>{company}</li>)}
+                            </ul>
+                        </div>
+                    )}
+                    {report.profile.knownLocations?.length > 0 && (
+                        <div>
+                            <strong className="block font-semibold text-gray-200">สถานที่ที่รู้จัก:</strong>
+                            <ul className="list-disc list-outside pl-5 mt-1 text-gray-300 space-y-1">
+                                {report.profile.knownLocations.map((location, i) => <li key={i}>{location}</li>)}
+                            </ul>
+                        </div>
+                    )}
+                </div>
             </Card>
             <Card title="สัญญาณความเสี่ยง">
                 <ul className="list-disc list-outside pl-4 space-y-1 text-red-300/90">

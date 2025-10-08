@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FurtherInvestigation } from './FurtherInvestigation';
+// FIX: Changed the named import to a default import as 'FurtherInvestigation' is a default export.
+import FurtherInvestigation from './FurtherInvestigation';
 import FeedbackControl from './FeedbackControl';
 import type { UserContribution } from '../../types';
 
@@ -48,13 +49,13 @@ const Card: React.FC<CardProps> = (props) => {
   };
 
   const CardHeader = () => (
-    <div className="p-4 sm:p-5 border-b border-zinc-700/50">
+    <div className="p-6 border-b border-zinc-700/50">
       <div 
         className={`flex items-center justify-between ${isCollapsible ? 'cursor-pointer' : ''}`}
         onClick={isCollapsible ? () => setIsOpen(!isOpen) : undefined}
         aria-expanded={isOpen}
       >
-        <h3 className="text-lg font-bold text-[#F58220] flex items-center gap-3">{title}</h3>
+        <h3 className="text-xl font-bold text-[#F58220] flex items-center gap-3">{title}</h3>
         <div className="flex items-center gap-2">
           {headerActions}
           {onExport && (
@@ -82,13 +83,13 @@ const Card: React.FC<CardProps> = (props) => {
       {isOpen && (
         <>
           <div 
-            className={`p-4 sm:p-6 text-gray-300 bg-black/10 ${isContentClickable && onEditContribution ? 'cursor-pointer hover:bg-zinc-800/20 transition-colors' : ''}`}
+            className={`p-6 text-gray-300 bg-black/10 ${isContentClickable && onEditContribution ? 'cursor-pointer hover:bg-zinc-800/20 transition-colors' : ''}`}
             onClick={isContentClickable && onEditContribution ? onEditContribution : undefined}
           >
             {children}
           </div>
           {(investigationContext || feedbackContext || onEditContribution) && (
-            <div className="p-4 border-t border-zinc-700/50 bg-black/10 flex flex-col gap-4">
+            <div className="p-6 border-t border-zinc-700/50 bg-black/10 flex flex-col gap-6">
               {latestContribution && (
                 <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-4">
                   <div className="flex justify-between items-center mb-2">
@@ -120,9 +121,9 @@ const Card: React.FC<CardProps> = (props) => {
                   )}
                 </div>
               )}
-              <div className="flex justify-between items-center gap-4 flex-wrap">
+              <div className="flex justify-between items-center gap-6 flex-wrap">
                 {investigationContext && investigationTitle && onNewContribution ? (
-                  <FurtherInvestigation sectionContext={investigationContext} sectionTitle={investigationTitle} onNewContribution={onNewContribution} />
+                  <FurtherInvestigation sectionContext={investigationContext} sectionTitle={investigationTitle} onNewContribution={onNewContribution} report={null} />
                 ) : <div />}
                 
                 <div className="flex items-center gap-4">

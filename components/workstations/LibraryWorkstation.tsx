@@ -62,8 +62,8 @@ const LibraryWorkstation: React.FC<LibraryWorkstationProps> = ({ onSelectReport 
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-white mb-1">ห้องสมุดข่าวกรอง</h2>
-      <p className="text-gray-400 mb-6">ค้นหาและเข้าถึงรายงานข่าวกรองทั้งหมดที่สร้างขึ้นก่อนหน้านี้</p>
+      <h2 className="text-3xl font-bold text-white mb-2">ห้องสมุดข่าวกรอง</h2>
+      <p className="text-base text-gray-400 mb-8">ค้นหาและเข้าถึงรายงานข่าวกรองทั้งหมดที่สร้างขึ้นก่อนหน้านี้</p>
 
       <div className="mb-4">
         <div className="relative flex items-center">

@@ -1,4 +1,4 @@
-import type { IntelligenceBriefingReport, PolicyCredibilityScore, EnhancedStakeholder, InternalStrategy, DraftComparisonReport, IntelReport, MethodologyReport, UserContribution, WebSource, ForensicBudgetAnalysisReport, RiskImpactAnalysis, AntiMonopolyAnalysis, EnhancedPartyDraftComparison, SubstrateArgumentGraph } from '../types';
+import type { IntelligenceBriefingReport, PolicyCredibilityScore, EnhancedStakeholder, InternalStrategy, DraftComparisonReport, IntelReport, MethodologyReport, UserContribution, WebSource, ForensicBudgetAnalysisReport, RiskImpactAnalysis, AntiMonopolyAnalysis, EnhancedPartyDraftComparison, SubstrateArgumentGraph, SocialMediaSentiment } from '../types';
 
 // --- TRANSLATION MAPS ---
 const audienceMap: { [key: string]: string } = {
@@ -271,6 +271,78 @@ export const generateMarkdownForForensicBudgetAnalysis = (report: ForensicBudget
     return md;
 };
 
+export const generateMarkdownForArgumentGraph = (graph: SubstrateArgumentGraph): string => {
+    let md = `## กราฟโครงสร้างข้อโต้แย้ง\n\n`;
+
+    md += `### ✅ ข้อโต้แย้งฝ่ายสนับสนุน\n\n`;
+    (graph.pro || []).forEach(arg => {
+        md += `#### ${arg.title}\n`;
+        md += `*กรอบการนำเสนอ: ${arg.frame}*\n\n`;
+        arg.claims.forEach(claim => {
+            md += `- **ข้อกล่าวอ้าง:** ${claim.claim}\n`;
+            md += `  - **รายละเอียด:** ${claim.detail}\n`;
+        });
+        md += `\n`;
+    });
+
+    md += `### ❌ ข้อโต้แย้งฝ่ายคัดค้าน\n\n`;
+    (graph.con || []).forEach(arg => {
+        md += `#### ${arg.title}\n`;
+        md += `*กรอบการนำเสนอ: ${arg.frame}*\n\n`;
+        arg.claims.forEach(claim => {
+            md += `- **ข้อกล่าวอ้าง:** ${claim.claim}\n`;
+            md += `  - **รายละเอียด:** ${claim.detail}\n`;
+        });
+        md += `\n`;
+    });
+    
+    return md;
+};
+
+export const generateMarkdownForPartyComparison = (comparison: EnhancedPartyDraftComparison[]): string => {
+    let md = `## การเปรียบเทียบร่างของพรรค\n\n`;
+    md += `| พรรค | จุดยืน | การวางตำแหน่งความเสี่ยง | ข้อกฎหมายที่น่าสังเกต |\n`;
+    md += `|---|---|---|---|\n`;
+    (comparison || []).forEach(p => {
+        md += `| ${p.party} | ${p.position} | ${p.riskPositioning} | ${p.notableClause} |\n`;
+    });
+    return md;
+};
+
+export const generateMarkdownForSocialMediaSentiment = (sm: SocialMediaSentiment): string => {
+    if (!sm) return '';
+    let md = `## ภูมิทัศน์การถกเถียงในที่สาธารณะ (ผ่าน ${sm.hashtag})\n\n`;
+    md += `* **ความรู้สึก:** สนับสนุน ${sm.proPercent}%, คัดค้าน ${sm.antiPercent}%, เป็นกลาง ${sm.neutralPercent}%\n`;
+    
+    if (sm.commonConcerns && sm.commonConcerns.length > 0) {
+        md += `* **ข้อกังวลที่ถูกกล่าวถึงมากที่สุด:**\n`;
+        sm.commonConcerns.forEach(c => md += `  * ${c}\n`);
+    }
+
+    if (sm.argumentClusters && sm.argumentClusters.length > 0) {
+        md += `\n### กลุ่มข้อโต้แย้งหลัก\n`;
+        sm.argumentClusters.forEach(cluster => {
+            md += `#### ${cluster.theme}\n`;
+            md += `> *${cluster.summary}*\n\n`;
+            (cluster.representativeQuotes || []).forEach(quote => {
+                md += `* "${quote}"\n`;
+            });
+            md += '\n';
+        });
+    }
+
+    return md;
+};
+
+export const generateMarkdownForRiskImpactAnalysis = (analysis: RiskImpactAnalysis): string => {
+    if (!analysis) return '';
+    let md = `## การวิเคราะห์ความเสี่ยงและผลกระทบ\n\n`;
+    md += `### สาธารณสุข\n${analysis.publicHealth}\n\n`;
+    md += `### เศรษฐกิจ\n${analysis.economic}\n\n`;
+    md += `### ความสมานฉันท์ทางสังคม\n${analysis.socialCohesion}\n\n`;
+    return md;
+};
+
 
 // --- MAIN REPORT GENERATOR ---
 
@@ -291,13 +363,22 @@ export const generateMarkdownForIntelligenceBriefing = (report: IntelligenceBrie
     if (report.internalStrategy) md += generateMarkdownForInternalStrategy(report.internalStrategy) + '\n---\n\n';
     if (report.stakeholderAnalysis) md += generateMarkdownForStakeholders(report.stakeholderAnalysis) + '\n---\n\n';
     if (report.antiMonopolyAnalysis) md += generateMarkdownForAntiMonopolyAnalysis(report.antiMonopolyAnalysis) + '\n---\n\n';
+
+    if (report.partyDraftComparison && report.partyDraftComparison.length > 0) {
+        md += generateMarkdownForPartyComparison(report.partyDraftComparison) + '\n---\n\n';
+    }
+
+    if (report.substrateArgumentGraph) {
+        md += generateMarkdownForArgumentGraph(report.substrateArgumentGraph) + '\n---\n\n';
+    }
+
+    if (report.riskImpactAnalysis) {
+        md += generateMarkdownForRiskImpactAnalysis(report.riskImpactAnalysis) + '\n---\n\n';
+    }
     
-    md += `## ภูมิทัศน์การถกเถียงในที่สาธารณะ (ผ่าน ${report.socialMediaSentiment.hashtag})\n`;
-    const sm = report.socialMediaSentiment;
-    md += `* **ความรู้สึก:** สนับสนุน ${sm.proPercent}%, คัดค้าน ${sm.antiPercent}%, เป็นกลาง ${sm.neutralPercent}%\n`;
-    md += `* **ข้อกังวลที่ถูกกล่าวถึงมากที่สุด:**\n`;
-    sm.commonConcerns.forEach(c => md += `  * ${c}\n`);
-    md += '\n---\n\n';
+    if (report.socialMediaSentiment) {
+        md += generateMarkdownForSocialMediaSentiment(report.socialMediaSentiment) + '\n---\n\n';
+    }
 
     if (report.methodology) {
         md += generateMarkdownForMethodology(report.methodology) + '\n---\n\n';

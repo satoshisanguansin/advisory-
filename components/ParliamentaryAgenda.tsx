@@ -17,7 +17,7 @@ const AlertCard: React.FC<{
     onAction: () => void;
     icon: React.ReactNode;
 }> = ({ title, description, actionText, onAction, icon }) => (
-    <div className="bg-zinc-800 p-4 rounded-lg flex items-start gap-4">
+    <div className="bg-zinc-800 p-5 rounded-lg flex items-start gap-5">
         <div className="flex-shrink-0 text-orange-400 mt-1">{icon}</div>
         <div className="flex-grow">
             <h4 className="font-bold text-white">{title}</h4>
@@ -90,10 +90,10 @@ const DashboardWorkstation: React.FC<DashboardWorkstationProps> = ({ onSelectRep
 
   return (
     <div>
-        <h2 className="text-2xl font-bold text-white mb-1">ห้องสถานการณ์ (Situation Room)</h2>
-        <p className="text-gray-400 mb-6">ภาพรวมข่าวกรองล่าสุดและการแจ้งเตือนเชิงรุกจากระบบ AI</p>
+        <h2 className="text-3xl font-bold text-white mb-2">ห้องสถานการณ์ (Situation Room)</h2>
+        <p className="text-base text-gray-400 mb-8">ภาพรวมข่าวกรองล่าสุดและการแจ้งเตือนเชิงรุกจากระบบ AI</p>
         
-        <div className="space-y-6">
+        <div className="space-y-8">
             {isCheckingAgendas && (
                 <div className="bg-zinc-800 p-4 rounded-lg flex items-center gap-4">
                     <LoadingSpinner className="w-5 h-5 text-orange-400" />
@@ -146,10 +146,10 @@ const DashboardWorkstation: React.FC<DashboardWorkstationProps> = ({ onSelectRep
                 </div>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-10">
                  <h3 className="text-lg font-bold text-white mb-3">วาระสำคัญสูงสุด</h3>
                 {pinnedReportData && (
-                    <div className="bg-zinc-800 p-4 rounded-lg border-l-4 border-red-500/60 space-y-4">
+                    <div className="bg-zinc-800 p-6 rounded-lg border-l-4 border-red-500/60 space-y-6">
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                             <div className="flex-grow min-w-0">
                                 <h3 className="font-bold text-white text-lg flex items-center">
@@ -176,7 +176,7 @@ const DashboardWorkstation: React.FC<DashboardWorkstationProps> = ({ onSelectRep
                 )}
             </div>
 
-            <div className="mt-8">
+            <div className="mt-10">
                  <h3 className="text-lg font-bold text-white mb-3">ระเบียบวาระที่กำลังจะมาถึง</h3>
                  <p className="text-sm text-gray-500 mb-4">เลือกหัวข้อเพื่อดูบทสรุปข่าวกรองที่สร้างไว้ล่วงหน้า</p>
                  <div className="space-y-4">

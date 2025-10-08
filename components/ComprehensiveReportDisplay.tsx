@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
-import type { IntelligenceBriefingReport, WebSource, PolicyCredibilityScore, EnhancedStakeholder, InternalStrategy, SocialMediaSentiment, EnhancedPartyDraftComparison, AntiMonopolyAnalysis, UserContribution, DiscussionComment } from '../types';
+import type { IntelligenceBriefingReport, WebSource, PolicyCredibilityScore, EnhancedStakeholder, InternalStrategy, SocialMediaSentiment, EnhancedPartyDraftComparison, AntiMonopolyAnalysis, UserContribution, DiscussionComment, SubstrateArgumentGraph, RiskImpactAnalysis } from '../types';
 import ExportButton from './ExportButton';
 import { 
     generateMarkdownForIntelligenceBriefing, 
@@ -7,11 +7,17 @@ import {
     generateMarkdownForInternalStrategy,
     generateMarkdownForStakeholders,
     generateMarkdownForMethodology,
+    generateMarkdownForAntiMonopolyAnalysis,
+    generateMarkdownForArgumentGraph,
+    generateMarkdownForPartyComparison,
+    generateMarkdownForSocialMediaSentiment,
+    generateMarkdownForRiskImpactAnalysis,
 } from '../utils/exportUtils';
 import LoadingSpinner from './icons/LoadingSpinner';
 import NetworkGraph from './shared/NetworkGraph';
 import StancePolling from './StancePolling';
-import { FurtherInvestigation } from './shared/FurtherInvestigation';
+// FIX: Changed the named import to a default import as 'FurtherInvestigation' is a default export.
+import FurtherInvestigation from './shared/FurtherInvestigation';
 import * as db from '../services/firebaseService';
 import UserContributions from './shared/UserContributions';
 import { useAuth } from '../contexts/AuthContext';
@@ -70,8 +76,21 @@ const Card: React.FC<{
   );
 };
 
-const AntiMonopolyAnalysisDisplay: React.FC<{ analysis: AntiMonopolyAnalysis; onNewContribution: (finding: Omit<UserContribution, 'id' | 'timestamp' | 'authorId' | 'authorName'>) => void; }> = ({ analysis, onNewContribution }) => {
+const AntiMonopolyAnalysisDisplay: React.FC<{ analysis: AntiMonopolyAnalysis; onNewContribution?: (finding: Omit<UserContribution, 'id' | 'timestamp' | 'authorId' | 'authorName'>) => void; }> = ({ analysis, onNewContribution }) => {
     const [activeTab, setActiveTab] = useState<'overview' | 'mechanisms' | 'impact'>('overview');
+
+    const handleExport = () => {
+        const markdown = generateMarkdownForAntiMonopolyAnalysis(analysis);
+        const blob = new Blob([markdown], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'anti-monopoly-analysis.md';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
 
     const TabButton: React.FC<{ tabId: 'overview' | 'mechanisms' | 'impact'; label: string; }> = ({ tabId, label }) => {
         const isActive = activeTab === tabId;
@@ -197,6 +216,11 @@ const AntiMonopolyAnalysisDisplay: React.FC<{ analysis: AntiMonopolyAnalysis; on
                         </svg>
                         วิเคราะห์การต่อต้านการผูกขาดและการทุจริต
                     </h3>
+                    <button onClick={handleExport} className="p-2 text-red-300/70 hover:text-white transition-colors" aria-label="Export this section">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                           <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </button>
                 </div>
             </div>
             <div className="bg-red-900/10">
@@ -250,7 +274,7 @@ const SourcesDisplay: React.FC<{ sources: WebSource[] }> = ({ sources }) => (
     </Card>
 );
 
-const CredibilityScoreDisplay: React.FC<{ score: PolicyCredibilityScore; onNewContribution: (finding: Omit<UserContribution, 'id' | 'timestamp' | 'authorId' | 'authorName'>) => void; }> = ({ score, onNewContribution }) => {
+const CredibilityScoreDisplay: React.FC<{ score: PolicyCredibilityScore; onNewContribution?: (finding: Omit<UserContribution, 'id' | 'timestamp' | 'authorId' | 'authorName'>) => void; }> = ({ score, onNewContribution }) => {
     const color = score.overallScore > 75 ? 'text-green-400' : score.overallScore > 50 ? 'text-yellow-400' : 'text-red-400';
     
     const handleExport = () => {
@@ -295,7 +319,7 @@ const CredibilityScoreDisplay: React.FC<{ score: PolicyCredibilityScore; onNewCo
     );
 };
 
-const StrategicCommunicationsDisplay: React.FC<{ strategy: InternalStrategy; onNewContribution: (finding: Omit<UserContribution, 'id' | 'timestamp' | 'authorId' | 'authorName'>) => void; }> = ({ strategy, onNewContribution }) => {
+const StrategicCommunicationsDisplay: React.FC<{ strategy: InternalStrategy; onNewContribution?: (finding: Omit<UserContribution, 'id' | 'timestamp' | 'authorId' | 'authorName'>) => void; }> = ({ strategy, onNewContribution }) => {
     const [activeTab, setActiveTab] = useState(strategy.talkingPoints[0]?.audience || 'Press');
 
     const handleExport = () => {
@@ -370,8 +394,21 @@ const SocialMediaSentimentDisplay: React.FC<{ sentiment: SocialMediaSentiment }>
         { label: 'คัดค้าน', value: sentiment.antiPercent, color: 'bg-red-500' },
         { label: 'เป็นกลาง', value: sentiment.neutralPercent, color: 'bg-gray-500' },
     ];
+    const handleExport = () => {
+        const markdown = generateMarkdownForSocialMediaSentiment(sentiment);
+        const blob = new Blob([markdown], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'social-media-sentiment.md';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
     return (
-        <Card id="public-debate" title="ภาพรวมการถกเถียงสาธารณะ" isCollapsible>
+        <Card id="public-debate" title="ภาพรวมการถกเถียงสาธารณะ" isCollapsible onExport={handleExport}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                      <h4 className="font-bold text-white mb-3">ความรู้สึกของสาธารณชนจำลอง ({sentiment.hashtag})</h4>
@@ -414,7 +451,7 @@ const SocialMediaSentimentDisplay: React.FC<{ sentiment: SocialMediaSentiment }>
 };
 
 
-const StakeholderAnalysisDisplay: React.FC<{stakeholders: EnhancedStakeholder[]; onNewContribution: (finding: Omit<UserContribution, 'id' | 'timestamp' | 'authorId' | 'authorName'>) => void;}> = ({ stakeholders, onNewContribution }) => {
+const StakeholderAnalysisDisplay: React.FC<{stakeholders: EnhancedStakeholder[]; onNewContribution?: (finding: Omit<UserContribution, 'id' | 'timestamp' | 'authorId' | 'authorName'>) => void;}> = ({ stakeholders, onNewContribution }) => {
     const handleExport = () => {
         const markdown = generateMarkdownForStakeholders(stakeholders);
         const blob = new Blob([markdown], { type: 'text/markdown' });
@@ -463,8 +500,21 @@ const StakeholderAnalysisDisplay: React.FC<{stakeholders: EnhancedStakeholder[];
 }
 
 const PartyComparisonDisplay: React.FC<{comparison: EnhancedPartyDraftComparison[]}> = ({comparison}) => {
+    const handleExport = () => {
+        const markdown = generateMarkdownForPartyComparison(comparison);
+        const blob = new Blob([markdown], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'party-comparison.md';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
     return (
-        <Card id="party-comparison" title="การเปรียบเทียบร่างของพรรค" isCollapsible defaultClosed>
+        <Card id="party-comparison" title="การเปรียบเทียบร่างของพรรค" isCollapsible defaultClosed onExport={handleExport}>
             <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left text-gray-400">
                     <thead className="text-xs text-gray-300 uppercase bg-zinc-800">
@@ -638,6 +688,34 @@ const ComprehensiveReportDisplay: React.FC<IntelligenceBriefingDisplayProps> = (
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
+
+  const handleExportArgumentGraph = () => {
+    if (!currentReport?.substrateArgumentGraph) return;
+    const markdown = generateMarkdownForArgumentGraph(currentReport.substrateArgumentGraph);
+    const blob = new Blob([markdown], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'argument-graph.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+  
+  const handleExportRiskImpact = () => {
+    if (!currentReport?.riskImpactAnalysis) return;
+    const markdown = generateMarkdownForRiskImpactAnalysis(currentReport.riskImpactAnalysis);
+    const blob = new Blob([markdown], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'risk-impact-analysis.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
   
   const containerClass = isStandaloneView ? "" : "mt-8";
 
@@ -750,7 +828,7 @@ const ComprehensiveReportDisplay: React.FC<IntelligenceBriefingDisplayProps> = (
                 <NetworkGraph graphData={currentReport.stakeholderNetworkGraph} />
             </Card>
             
-            <Card id="argument-graph" title="กราฟโครงสร้างข้อโต้แย้ง" isCollapsible defaultClosed>
+            <Card id="argument-graph" title="กราฟโครงสร้างข้อโต้แย้ง" isCollapsible defaultClosed onExport={handleExportArgumentGraph}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-green-900/20 p-4 rounded-lg">
                         <h4 className="font-bold text-green-300 mb-3">ข้อโต้แย้งฝ่ายสนับสนุน</h4>
@@ -787,7 +865,7 @@ const ComprehensiveReportDisplay: React.FC<IntelligenceBriefingDisplayProps> = (
                 </div>
             </Card>
 
-            <Card id="risk-impact" title="การวิเคราะห์ความเสี่ยงและผลกระทบ" isCollapsible defaultClosed>
+            <Card id="risk-impact" title="การวิเคราะห์ความเสี่ยงและผลกระทบ" isCollapsible defaultClosed onExport={handleExportRiskImpact}>
                 <div>
                     <h4 className="font-semibold text-white">สาธารณสุข</h4>
                     <p className="text-sm text-gray-400">{currentReport.riskImpactAnalysis.publicHealth}</p>

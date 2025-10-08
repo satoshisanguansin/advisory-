@@ -6,7 +6,7 @@ const LoginPage: React.FC = () => {
     const { signIn, authError } = useAuth();
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-zinc-900 via-gray-900 to-zinc-900">
             <div className="w-full max-w-md text-center">
                 <Logo className="h-20 w-20 mx-auto" showText={false} />
                 <h1 className="text-3xl font-bold text-white mt-6">พรรคประชาชน AI</h1>

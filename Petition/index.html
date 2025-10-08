@@ -1,9 +1,3 @@
-import React from 'react';
-
-// The full HTML content provided by the user is stored here.
-// Duplicated sections and malformed HTML have been removed for clean rendering.
-// IMG tags with local sources have been replaced with placeholder divs.
-const originalPetitionHtml = `
 <!doctype html>
 <html lang="th" prefix="og: https://ogp.me/ns# website: https://ogp.me/ns/website#">
 <head>
@@ -1346,84 +1340,166 @@ const originalPetitionHtml = `
                     <p class="section-subtitle" data-animate>รวบรวมหลักฐานภาพ, วิดีโอ, และเอกสารที่แสดงถึงการละเมิดสัญญาและความเสี่ยงต่อความปลอดภัยของประชาชน</p>
                     
                    <div class="card" data-animate>
-                        <h3 class="subsection-title">ภัยอันตรายจากพื้นที่ก่อสร้าง</h3>
-                        <div class="evidence-gallery">
-                            <div class="evidence-item">
-                                <div class="evidence-category">ไฟไหม้</div>
-                                <a href="https://www.youtube.com/watch?v=XUgQHLjgips" target="_blank">
-                                    <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) ภัยอันตรายจากพื้นที่ก่อสร้าง - ไฟไหม้</div>
+    <h3 class="subsection-title">ภัยอันตรายจากพื้นที่ก่อสร้าง</h3>
+    <div class="evidence-gallery">
+        <div class="evidence-item">
+            <div class="evidence-category">ไฟไหม้</div>
+            <a href="https://www.youtube.com/watch?v=XUgQHLjgips" target="_blank">
+                <img src="images/safety.jpeg" alt="ภัยอันตรายจากพื้นที่ก่อสร้าง - ไฟไหม้" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">วิดีโอแสดงเหตุเพลิงไหม้จากไซต์งานก่อสร้าง</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">อุบัติเหตุ</div>
+            <a href="https://maps.app.goo.gl/GuquKG7sEuM9sULv9" target="_blank">
+                <img src="images/safety2.jpeg" alt="จุดเกิดอุบัติเหตุในพื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">จุดเกิดอุบัติเหตุในพื้นที่ก่อสร้าง</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">ความมืดอันตราย</div>
+            <a href="https://maps.app.goo.gl/KKf4uFRXMZGURBC27" target="_blank">
+                <img src="images/dark.jpeg" alt="พื้นที่ก่อสร้างที่มืดและอันตรายในเวลากลางคืน" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">พื้นที่ก่อสร้างที่มืดและอันตรายในเวลากลางคืน</div>
+        </div>
+    </div>
+</div>
+
+<div class="card" data-animate>
+    <h3 class="subsection-title">ผลกระทบต่อสิ่งแวดล้อมและสุขภาพ</h3>
+    <div class="evidence-gallery">
+        <div class="evidence-item">
+            <div class="evidence-category">PM2.5</div>
+            <a href="https://maps.app.goo.gl/cSszYDJ" target="_blank">
+                <img src="images/enviroment.jpeg" alt="ระดับฝุ่น PM2.5 ในพื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">ระดับฝุ่น PM2.5 ในพื้นที่ก่อสร้าง</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">มลพิษ</div>
+            <a href="https://maps.app.goo.gl/Z6QJJGbTTAKQwGET9" target="_blank">
+                <img src="images/community.jpeg" alt="พื้นที่ก่อสร้างและผลกระทบต่อสิ่งแวดล้อม" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">พื้นที่ก่อสร้างและผลกระทบต่อสิ่งแวดล้อม</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">ความเสี่ยงเครื่องจักร</div>
+            <a href="https://maps.app.goo.gl/n8sxvNat2ZuUiRLz8" target="_blank">
+                <img src="images/machineunsafe.jpeg" alt="เครื่องจักรที่ไม่ปลอดภัยในพื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">เครื่องจักรที่ไม่ปลอดภัยในพื้นที่ก่อสร้าง</div>
+        </div>
+    </div>
+</div>
+
+<div class="card" data-animate>
+    <h3 class="subsection-title">ผลกระทบต่อชุมชน</h3>
+    <div class="evidence-gallery">
+        <div class="evidence-item">
+            <div class="evidence-category">ผลกระทบต่อชุมชน</div>
+            <a href="https://pr-bangkok.com/?p=473822" target="_blank">
+                <img src="images/badforcommunity.jpeg" alt="ผลกระทบจากการก่อสร้างต่อชุมชน" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">ผลกระทบจากการก่อสร้างต่อชุมชนโดยรอบ</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">หลุมอันตราย</div>
+            <a href="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1NFAja.img?w=768&h=1023&m=6&x=592&y=427&s=54&d=54" target="_blank">
+                <img src="images/hole.jpeg" alt="หลุมอันตรายในพื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">หลุมอันตรายในพื้นที่ก่อสร้าง</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">ป้ายรถโดยสารโรงเรียน</div>
+            <a href="https://static.amarintv.com/media/Dpe4A5wywPfUHk234CKbTkvJg0CTESpTMR6LNc3gYDGioyPpV6a3rEByqg88KeZ5b.jpg" target="_blank">
+                <img src="images/busstopschool.jpeg" alt="ป้ายรถโดยสารโรงเรียนใกล้พื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">ป้ายรถโดยสารโรงเรียนใกล้พื้นที่ก่อสร้าง</div>
                                 </a>
-                                <div class="evidence-caption">วิดีโอแสดงเหตุเพลิงไหม้จากไซต์งานก่อสร้าง</div>
-                            </div>
-                            <div class="evidence-item">
-                                <div class="evidence-category">อุบัติเหตุ</div>
-                                <a href="https://maps.app.goo.gl/GuquKG7sEuM9sULv9" target="_blank">
-                                    <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) จุดเกิดอุบัติเหตุในพื้นที่ก่อสร้าง</div>
-                                </a>
-                                <div class="evidence-caption">จุดเกิดอุบัติเหตุในพื้นที่ก่อสร้าง</div>
-                            </div>
-                            <div class="evidence-item">
-                                <div class="evidence-category">ความมืดอันตราย</div>
-                                <a href="https://maps.app.goo.gl/KKf4uFRXMZGURBC27" target="_blank">
-                                    <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) พื้นที่ก่อสร้างที่มืดและอันตรายในเวลากลางคืน</div>
-                                </a>
-                                <div class="evidence-caption">พื้นที่ก่อสร้างที่มืดและอันตรายในเวลากลางคืน</div>
+                                <div class="evidence-caption">มูลค่าสัญญาและรายละเอียดโครงการ</div>
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="card" data-animate>
-                        <h3 class="subsection-title">ผลกระทบต่อสิ่งแวดล้อมและสุขภาพ</h3>
-                        <div class="evidence-gallery">
-                            <div class="evidence-item">
-                                <div class="evidence-category">PM2.5</div>
-                                <a href="https://maps.app.goo.gl/cSszYDJ" target="_blank">
-                                    <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) ระดับฝุ่น PM2.5 ในพื้นที่ก่อสร้าง</div>
-                                </a>
-                                <div class="evidence-caption">ระดับฝุ่น PM2.5 ในพื้นที่ก่อสร้าง</div>
-                            </div>
-                            <div class="evidence-item">
-                                <div class="evidence-category">มลพิษ</div>
-                                <a href="https://maps.app.goo.gl/Z6QJJGbTTAKQwGET9" target="_blank">
-                                    <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) พื้นที่ก่อสร้างและผลกระทบต่อสิ่งแวดล้อม</div>
-                                </a>
-                                <div class="evidence-caption">พื้นที่ก่อสร้างและผลกระทบต่อสิ่งแวดล้อม</div>
-                            </div>
-                            <div class="evidence-item">
-                                <div class="evidence-category">ความเสี่ยงเครื่องจักร</div>
-                                <a href="https://maps.app.goo.gl/n8sxvNat2ZuUiRLz8" target="_blank">
-                                    <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) เครื่องจักรที่ไม่ปลอดภัยในพื้นที่ก่อสร้าง</div>
-                                </a>
-                                <div class="evidence-caption">เครื่องจักรที่ไม่ปลอดภัยในพื้นที่ก่อสร้าง</div>
-                            </div>
-                        </div>
-                    </div>
+    <h3 class="subsection-title">ภัยอันตรายจากพื้นที่ก่อสร้าง</h3>
+    <div class="evidence-gallery">
+        <div class="evidence-item">
+            <div class="evidence-category">ไฟไหม้</div>
+            <a href="https://www.youtube.com/watch?v=XUgQHLjgips" target="_blank">
+                <img src="images/causefire.jpeg" alt="ภัยอันตรายจากพื้นที่ก่อสร้าง - ไฟไหม้" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">วิดีโอแสดงเหตุเพลิงไหม้จากไซต์งานก่อสร้าง</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">อุบัติเหตุ</div>
+            <a href="https://maps.app.goo.gl/GuquKG7sEuM9sULv9" target="_blank">
+                <img src="images/accident.jpeg" alt="จุดเกิดอุบัติเหตุในพื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">จุดเกิดอุบัติเหตุในพื้นที่ก่อสร้าง</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">อันตราย</div>
+            <a href="https://maps.app.goo.gl/KKf4uFRXMZGURBC27" target="_blank">
+                <img src="images/accident2.jpeg" alt="พื้นที่ก่อสร้างที่มืดและอันตรายในเวลากลางคืน" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">พื้นที่ก่อสร้างที่มืดและอันตรายในเวลากลางคืน</div>
+        </div>
+    </div>
+</div>
 
-                    <div class="card" data-animate>
-                        <h3 class="subsection-title">ผลกระทบต่อชุมชน</h3>
-                        <div class="evidence-gallery">
+<div class="card" data-animate>
+    <h3 class="subsection-title">ผลกระทบต่อสิ่งแวดล้อมและสุขภาพ</h3>
+    <div class="evidence-gallery">
+        <div class="evidence-item">
+            <div class="evidence-category">PM2.5</div>
+            <a href="https://maps.app.goo.gl/cSszYDJ" target="_blank">
+                <img src="images/pm.jpeg" alt="ระดับฝุ่น PM2.5 ในพื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">ระดับฝุ่น PM2.5 ในพื้นที่ก่อสร้าง</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">มลพิษ</div>
+            <a href="https://maps.app.goo.gl/Z6QJJGbTTAKQwGET9" target="_blank">
+                <img src="images/enviroment.jpeg" alt="พื้นที่ก่อสร้างและผลกระทบต่อสิ่งแวดล้อม" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">พื้นที่ก่อสร้างและผลกระทบต่อสิ่งแวดล้อม</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">ความเสี่ยงเครื่องจักร</div>
+            <a href="https://maps.app.goo.gl/n8sxvNat2ZuUiRLz8" target="_blank">
+                <img src="images/machineunsafe.jpeg" alt="เครื่องจักรที่ไม่ปลอดภัยในพื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">เครื่องจักรที่ไม่ปลอดภัยในพื้นที่ก่อสร้าง</div>
+        </div>
+    </div>
+</div>
+
+<div class="card" data-animate>
+    <h3 class="subsection-title">ผลกระทบต่อชุมชน</h3>
+    <div class="evidence-gallery">
+        <div class="evidence-item">
+            <div class="evidence-category">ผลกระทบต่อชุมชน</div>
+            <a href="https://pr-bangkok.com/?p=473822" target="_blank">
+                <img src="images/badforcommunity.jpeg" alt="ผลกระทบจากการก่อสร้างต่อชุมชน" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">ผลกระทบจากการก่อสร้างต่อชุมชนโดยรอบ</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">หลุมอันตราย</div>
+            <a href="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1NFAja.img?w=768&h=1023&m=6&x=592&y=427&s=54&d=54" target="_blank">
+                <img src="images/hole.jpeg" alt="หลุมอันตรายในพื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">หลุมอันตรายในพื้นที่ก่อสร้าง</div>
+        </div>
+        <div class="evidence-item">
+            <div class="evidence-category">ป้ายรถโดยสารโรงเรียน</div>
+            <a href="https://static.amarintv.com/media/Dpe4A5wywPfUHk234CKbTkvJg0CTESpTMR6LNc3gYDGioyPpV6a3rEByqg88KeZ5b.jpg" target="_blank">
+                <img src="images/busstopschool.jpeg" alt="ป้ายรถโดยสารโรงเรียนใกล้พื้นที่ก่อสร้าง" style="width:100%; height:200px; object-fit: cover;">
+            </a>
+            <div class="evidence-caption">ป้ายรถโดยสารโรงเรียนใกล้พื้นที่ก่อสร้าง</div>
                             <div class="evidence-item">
-                                <div class="evidence-category">ผลกระทบต่อชุมชน</div>
-                                <a href="https://pr-bangkok.com/?p=473822" target="_blank">
-                                    <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) ผลกระทบจากการก่อสร้างต่อชุมชน</div>
-                                </a>
-                                <div class="evidence-caption">ผลกระทบจากการก่อสร้างต่อชุมชนโดยรอบ</div>
-                            </div>
-                            <div class="evidence-item">
-                                <div class="evidence-category">หลุมอันตราย</div>
-                                <a href="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1NFAja.img?w=768&h=1023&m=6&x=592&y=427&s=54&d=54" target="_blank">
-                                    <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) หลุมอันตรายในพื้นที่ก่อสร้าง</div>
-                                </a>
-                                <div class="evidence-caption">หลุมอันตรายในพื้นที่ก่อสร้าง</div>
-                            </div>
-                            <div class="evidence-item">
-                                <div class="evidence-category">ป้ายรถโดยสารโรงเรียน</div>
-                                <a href="https://static.amarintv.com/media/Dpe4A5wywPfUHk234CKbTkvJg0CTESpTMR6LNc3gYDGioyPpV6a3rEByqg88KeZ5b.jpg" target="_blank">
-                                     <div style="width:100%; height:200px; object-fit: cover; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) ป้ายรถโดยสารโรงเรียนใกล้พื้นที่ก่อสร้าง</div>
-                                </a>
-                                <div class="evidence-caption">ป้ายรถโดยสารโรงเรียนใกล้พื้นที่ก่อสร้าง</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -1583,15 +1659,15 @@ const originalPetitionHtml = `
             
             // Social Share Links
             const shareFacebook = document.getElementById('share-facebook');
-            if(shareFacebook) shareFacebook.href = \`https://www.facebook.com/sharer/sharer.php?u=\${encodeURIComponent(pageUrl)}\`;
+            if(shareFacebook) shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
             const shareTwitter = document.getElementById('share-twitter');
-            if(shareTwitter) shareTwitter.href = \`https://twitter.com/intent/tweet?text=\${encodeURIComponent(shareText)}&url=\${encodeURIComponent(pageUrl)}\`;
+            if(shareTwitter) shareTwitter.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(pageUrl)}`;
             const shareLine = document.getElementById('share-line');
-            if(shareLine) shareLine.href = \`https://social-plugins.line.me/lineit/share?url=\${encodeURIComponent(pageUrl)}&text=\${encodeURIComponent(shareText)}\`;
+            if(shareLine) shareLine.href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
             
             function updateProgressBar(currentSignatures) {
                 const percentage = (currentSignatures / SIGNATURE_GOAL) * 100;
-                if(progressBarFill) progressBarFill.style.width = \`\${Math.min(percentage, 100)}%\`;
+                if(progressBarFill) progressBarFill.style.width = `${Math.min(percentage, 100)}%`;
                 if(progressTextCurrent) progressTextCurrent.textContent = currentSignatures.toLocaleString('en-US');
             }
 
@@ -1621,23 +1697,3 @@ const originalPetitionHtml = `
     </script>
 </body>
 </html>
-`;
-
-// Replace local image paths with placeholders to avoid broken images.
-const imgRegex = /<img src="images\/([^"]+)" alt="([^"]+)" style="([^"]+)">/g;
-const finalHtml = originalPetitionHtml.replace(imgRegex, (match, src, alt, style) => {
-    return `<div style="${style}; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem; color: #888; font-size: 0.9rem; border: 1px dashed #444;">(Image) ${alt}</div>`;
-});
-
-
-const PetitionWorkstation: React.FC = () => {
-    return (
-        <iframe
-            srcDoc={finalHtml}
-            title="ยื่นคำร้อง"
-            className="w-full h-[calc(100vh-12rem)] lg:h-[calc(100vh-8rem)] border-none"
-        />
-    );
-};
-
-export default PetitionWorkstation;

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import type { ForensicBudgetAnalysisReport, ForensicFindingItem } from '../types';
 import ExportButton from './ExportButton';
@@ -15,7 +14,7 @@ const FindingCard: React.FC<{ item: ForensicFindingItem }> = ({ item }) => {
         <div className={`bg-zinc-800/50 rounded-xl overflow-hidden border-2 ${riskColor}`}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full p-4 flex justify-between items-center bg-zinc-800 hover:bg-zinc-700 transition-colors"
+                className="w-full p-5 flex justify-between items-center bg-zinc-800 hover:bg-zinc-700 transition-colors"
                 aria-expanded={isOpen}
             >
                 <div className="text-left">
@@ -30,8 +29,8 @@ const FindingCard: React.FC<{ item: ForensicFindingItem }> = ({ item }) => {
                 </svg>
             </button>
             {isOpen && (
-                <div className="p-4 sm:p-6 space-y-4 border-t border-zinc-700">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div className="p-6 space-y-5 border-t border-zinc-700">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                         <div className="bg-zinc-900/70 p-3 rounded-lg">
                              <div className="text-xs text-gray-400">ราคาตลาด (FMV)</div>
                              <div className="text-xl font-bold text-white">{item.fmvBenchmarkPerUnit.toLocaleString()}</div>
@@ -49,8 +48,15 @@ const FindingCard: React.FC<{ item: ForensicFindingItem }> = ({ item }) => {
                              <div className="text-xl font-bold text-orange-400">{item.totalSampleOverpayment.toLocaleString()}</div>
                         </div>
                     </div>
-                     <div className="text-sm">
-                        <p><strong className="text-gray-300">เขตที่เกี่ยวข้อง:</strong> {item.keyDistrictsInvolved.join(', ')}</p>
+                     <div className="text-sm space-y-2">
+                        {item.keyDistrictsInvolved?.length > 0 && (
+                            <div>
+                                <strong className="text-gray-300">เขตที่เกี่ยวข้อง:</strong>
+                                <ul className="list-disc list-outside pl-5 text-gray-400 mt-1">
+                                    {item.keyDistrictsInvolved.map((d, i) => <li key={i}>{d}</li>)}
+                                </ul>
+                            </div>
+                        )}
                         <p><strong className="text-gray-300">หมายเหตุ:</strong> {item.notesFromBudgetDoc}</p>
                         <p><strong className="text-gray-300">อ้างอิงราคา:</strong> <a href={item.marketReferenceSource} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">Link</a></p>
                      </div>
@@ -82,10 +88,10 @@ const ForensicBudgetAnalysisDisplay: React.FC<{ report: ForensicBudgetAnalysisRe
   };
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
         <div>
-            <h3 className="text-2xl font-bold text-white">{report.reportTitle}</h3>
+            <h3 className="text-3xl font-bold text-white">{report.reportTitle}</h3>
             <p className="text-sm text-gray-400">จัดทำเมื่อ: {report.reportDate} | เพื่อ: {report.preparedFor}</p>
         </div>
         <div className="flex items-center space-x-2">
@@ -102,10 +108,10 @@ const ForensicBudgetAnalysisDisplay: React.FC<{ report: ForensicBudgetAnalysisRe
         </div>
       </div>
 
-      <div className="bg-[#2a2f34] rounded-xl shadow-lg p-4 sm:p-6 border border-zinc-700">
+      <div className="bg-[#2a2f34] rounded-xl shadow-lg p-6 sm:p-8 border border-zinc-700">
         <h4 className="text-xl font-bold text-[#F58220]">{report.executiveSummary.title}</h4>
         <p className="text-base leading-relaxed text-gray-300 mt-2">{report.executiveSummary.overallFinding}</p>
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
             <div className="bg-zinc-800 p-3 rounded-lg"><strong className="text-gray-200 block">ตัวอย่างการสิ้นเปลือง:</strong> {report.executiveSummary.quantifiedWasteExample}</div>
             <div className="bg-zinc-800 p-3 rounded-lg"><strong className="text-gray-200 block">อัตราปัญหาเชิงระบบ:</strong> {report.executiveSummary.systemicIssueRate}</div>
             <div className="bg-zinc-800 p-3 rounded-lg"><strong className="text-gray-200 block">ประหยัดได้ต่อปี:</strong> {report.executiveSummary.potentialAnnualSavings}</div>
@@ -119,7 +125,7 @@ const ForensicBudgetAnalysisDisplay: React.FC<{ report: ForensicBudgetAnalysisRe
         ))}
       </div>
 
-      <div className="bg-[#2a2f34] rounded-xl shadow-lg p-4 sm:p-6 border border-zinc-700">
+      <div className="bg-[#2a2f34] rounded-xl shadow-lg p-6 sm:p-8 border border-zinc-700">
         <h4 className="text-xl font-bold text-[#F58220]">{report.callToAction.title}</h4>
         <p className="text-base text-gray-300 mt-2"><strong>เป้าหมายของเรา:</strong> {report.callToAction.ourGoal}</p>
         <ul className="list-disc list-outside pl-5 mt-3 space-y-1 text-gray-300">

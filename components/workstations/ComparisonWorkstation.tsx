@@ -60,8 +60,8 @@ const ComparisonWorkstation: React.FC = () => {
 
     return (
         <div className="flex flex-col flex-grow">
-            <h2 className="text-2xl font-bold text-white mb-1">เปรียบเทียบร่างกฎหมายเชิงกลยุทธ์</h2>
-            <p className="text-gray-400 mb-6">แนบร่างกฎหมายสองฉบับเพื่อสร้างการเปรียบเทียบเชิงลึก AI จะวิเคราะห์เนื้อหาทีละมาตรา และชี้ให้เห็นถึงความได้เปรียบเชิงกลยุทธ์</p>
+            <h2 className="text-3xl font-bold text-white mb-2">เปรียบเทียบร่างกฎหมายเชิงกลยุทธ์</h2>
+            <p className="text-base text-gray-400 mb-8">แนบร่างกฎหมายสองฉบับเพื่อสร้างการเปรียบเทียบเชิงลึก AI จะวิเคราะห์เนื้อหาทีละมาตรา และชี้ให้เห็นถึงความได้เปรียบเชิงกลยุทธ์</p>
 
             <div className="mb-4">
                 <label htmlFor="comparison-topic" className="block text-sm font-medium text-gray-300 mb-1">หัวข้อเปรียบเทียบ</label>

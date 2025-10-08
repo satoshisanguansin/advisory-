@@ -1,6 +1,7 @@
 // FIX: Import React to provide the 'React' namespace for types like React.ReactNode.
 import React from 'react';
-import { Chart as ChartJSChart } from 'chart.js';
+// FIX: Import ChartConfiguration from 'chart.js' to allow for strongly-typed chart configurations.
+import { Chart as ChartJSChart, ChartConfiguration } from 'chart.js';
 
 // --- CHARTING TYPES ---
 // Use the actual Chart.js type for better type safety
@@ -340,8 +341,10 @@ export interface ChatMessage {
 export interface InfographicData {
     title: string;
     charts: {
-        credibilityScore: ChartConfig;
-        publicSentiment: ChartConfig;
+        // FIX: Use the generic ChartConfiguration type to specify the exact chart type required by react-chartjs-2 components.
+        // This resolves the TypeScript error where a broad chart data type was not assignable to a specific one (e.g., Doughnut or Bar).
+        credibilityScore: ChartConfiguration<'doughnut'>;
+        publicSentiment: ChartConfiguration<'bar'>;
     };
     keyTakeaways: string[];
 }

@@ -56,7 +56,7 @@ const CommunicationsWorkstation: React.FC = () => {
             <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
                      <div>
-                        <h2 className="text-2xl font-bold text-white">ชุดสื่อสารสำหรับ: <span className="text-green-400">{topic}</span></h2>
+                        <h2 className="text-3xl font-bold text-white">ชุดสื่อสารสำหรับ: <span className="text-green-400">{topic}</span></h2>
                         <p className="text-gray-400">เนื้อหาที่สร้างโดย AI พร้อมสำหรับการตรวจสอบและใช้งาน</p>
                     </div>
                     <button onClick={handleClear} className="flex items-center space-x-2 px-3 py-1.5 bg-gray-600/50 hover:bg-gray-600 text-gray-300 hover:text-white rounded-md text-xs font-semibold transition-colors">
@@ -71,7 +71,7 @@ const CommunicationsWorkstation: React.FC = () => {
                     <div className="space-y-4">
                         <h3 className="font-bold text-white">X / Twitter Thread</h3>
                         {commsPackage.twitterThread.map((item, index) => (
-                            <div key={index} className="bg-zinc-800 p-3 rounded-lg">
+                            <div key={index} className="bg-zinc-800 p-4 rounded-lg">
                                 <p className="text-xs text-gray-400 mb-1">Tweet {index + 1}/{commsPackage.twitterThread.length}</p>
                                 <textarea readOnly value={item.tweet} rows={4} className="w-full bg-transparent text-sm text-gray-200 resize-none border-0 p-0 focus:ring-0"></textarea>
                             </div>
@@ -79,11 +79,11 @@ const CommunicationsWorkstation: React.FC = () => {
                     </div>
                      <div className="space-y-4">
                         <h3 className="font-bold text-white">Facebook Post</h3>
-                         <div className="bg-zinc-800 p-3 rounded-lg">
+                         <div className="bg-zinc-800 p-4 rounded-lg">
                             <textarea readOnly value={commsPackage.facebookPost} rows={8} className="w-full bg-transparent text-sm text-gray-200 resize-none border-0 p-0 focus:ring-0"></textarea>
                         </div>
                         <h3 className="font-bold text-white">Press Release Snippet</h3>
-                         <div className="bg-zinc-800 p-3 rounded-lg">
+                         <div className="bg-zinc-800 p-4 rounded-lg">
                              <textarea readOnly value={commsPackage.pressReleaseSnippet} rows={4} className="w-full bg-transparent text-sm text-gray-200 resize-none border-0 p-0 focus:ring-0"></textarea>
                         </div>
                     </div>
@@ -95,13 +95,13 @@ const CommunicationsWorkstation: React.FC = () => {
 
     return (
         <div className="flex flex-col justify-center flex-grow">
-            <h2 className="text-2xl font-bold text-white mb-1">สร้างเนื้อหาสื่อสาร</h2>
-            <p className="text-gray-400 mb-6">ป้อนหัวข้อและบริบท (เช่น บทสรุปสำหรับผู้บริหารจากรายงานข่าวกรอง) เพื่อให้ Campaign Agent สร้างชุดสื่อสารสำหรับโซเชียลมีเดีย</p>
+            <h2 className="text-3xl font-bold text-white mb-2">สร้างเนื้อหาสื่อสาร</h2>
+            <p className="text-base text-gray-400 mb-8">ป้อนหัวข้อและบริบท (เช่น บทสรุปสำหรับผู้บริหารจากรายงานข่าวกรอง) เพื่อให้ Campaign Agent สร้างชุดสื่อสารสำหรับโซเชียลมีเดีย</p>
             
             <div className="space-y-4">
                  <div>
                     <label htmlFor="comms-topic" className="block text-sm font-medium text-gray-300 mb-1">หัวข้อหลัก</label>
-                    <input type="text" id="comms-topic" value={topic} onChange={e => setTopic(e.target.value)} disabled={isLoading} className="w-full bg-[#212529] border border-gray-600 rounded-xl p-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 transition-shadow disabled:opacity-50" placeholder="เช่น ร่าง พ.ร.บ. การขนส่งทางราง"/>
+                    <input type="text" id="comms-topic" value={topic} onChange={e => setTopic(e.target.value)} disabled={isLoading} className="w-full bg-[#212529] border border-gray-600 rounded-xl p-4 text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 transition-shadow disabled:opacity-50" placeholder="เช่น ร่าง พ.ร.บ. การขนส่งทางราง"/>
                 </div>
                 <div>
                     <label htmlFor="comms-context" className="block text-sm font-medium text-gray-300 mb-1">บริบท / บทสรุป</label>
@@ -111,7 +111,7 @@ const CommunicationsWorkstation: React.FC = () => {
                         value={context} 
                         onChange={(e) => setContext(e.target.value)} 
                         disabled={isLoading} 
-                        className="w-full bg-[#212529] border border-gray-600 rounded-xl p-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 transition-shadow disabled:opacity-50" 
+                        className="w-full bg-[#212529] border border-gray-600 rounded-xl p-4 text-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 transition-shadow disabled:opacity-50" 
                         placeholder="วางบทสรุปสำหรับผู้บริหารหรือประเด็นสำคัญที่นี่..."
                     />
                 </div>

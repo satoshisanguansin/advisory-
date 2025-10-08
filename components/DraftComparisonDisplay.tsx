@@ -13,7 +13,7 @@ const ThematicPointCard: React.FC<{ point: ThematicPointComparison }> = ({ point
         <div className="bg-zinc-800/50 rounded-xl overflow-hidden border border-zinc-700">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full p-4 flex justify-between items-center bg-zinc-800 hover:bg-zinc-700 transition-colors"
+                className="w-full p-5 flex justify-between items-center bg-zinc-800 hover:bg-zinc-700 transition-colors"
             >
                 <h4 className="text-lg font-bold text-white">{point.theme}</h4>
                 <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 transform transition-transform text-gray-400 ${isOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -21,8 +21,8 @@ const ThematicPointCard: React.FC<{ point: ThematicPointComparison }> = ({ point
                 </svg>
             </button>
             {isOpen && (
-                <div className="p-4 sm:p-6 space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div className="p-6 space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
                         <div>
                             <h5 className="font-semibold text-gray-300 mb-2">จุดยืนพรรคประชาชน</h5>
                             <p className="text-gray-400">{point.peoplesPartyPosition}</p>
@@ -48,11 +48,11 @@ const ThematicPointCard: React.FC<{ point: ThematicPointComparison }> = ({ point
                     <div>
                         <h5 className="font-semibold text-gray-300 mb-3">หลักฐานระดับมาตรา</h5>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="bg-zinc-900/70 p-3 rounded-lg">
+                            <div className="bg-zinc-900/70 p-4 rounded-lg">
                                 <h6 className="text-xs font-bold text-gray-400 mb-2">ร่างของพรรคประชาชน</h6>
                                 <pre className="font-mono text-xs text-gray-300 whitespace-pre-wrap break-words">{ppClause}</pre>
                             </div>
-                             <div className="bg-zinc-900/70 p-3 rounded-lg">
+                             <div className="bg-zinc-900/70 p-4 rounded-lg">
                                 <h6 className="text-xs font-bold text-gray-400 mb-2">ร่างของฝ่ายตรงข้าม</h6>
                                 <pre className="font-mono text-xs text-gray-300 whitespace-pre-wrap break-words">{oppClause}</pre>
                             </div>
@@ -80,10 +80,10 @@ const DraftComparisonDisplay: React.FC<{ report: DraftComparisonReport; onClear:
   };
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
         <div>
-            <h3 className="text-2xl font-bold text-white">รายงานเปรียบเทียบเชิงกลยุทธ์</h3>
+            <h3 className="text-3xl font-bold text-white">รายงานเปรียบเทียบเชิงกลยุทธ์</h3>
             <p className="text-lg text-gray-400">{report.title}</p>
         </div>
         <div className="flex items-center space-x-2">
@@ -100,7 +100,7 @@ const DraftComparisonDisplay: React.FC<{ report: DraftComparisonReport; onClear:
         </div>
       </div>
 
-      <div className="bg-[#2a2f34] rounded-xl shadow-lg overflow-hidden p-4 sm:p-6 border border-zinc-700">
+      <div className="bg-[#2a2f34] rounded-xl shadow-lg overflow-hidden p-6 sm:p-8 border border-zinc-700">
         <h4 className="text-xl font-bold text-[#F58220]">บทสรุปสำหรับผู้บริหาร</h4>
         <p className="text-base leading-relaxed text-gray-300 mt-2">{report.executiveSummary}</p>
       </div>

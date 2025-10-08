@@ -1,4 +1,5 @@
 
+
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import type { IntelligenceBriefingReport, GenerationTask } from '../../types';
 import LoadingSpinner from '../icons/LoadingSpinner';
@@ -130,15 +131,15 @@ const BriefingWorkstation: React.FC<BriefingWorkstationProps> = ({ onSelectRepor
 
     return (
         <div className="flex flex-col justify-center flex-grow">
-            <h2 className="text-2xl font-bold text-white mb-1">สร้างบทสรุปใหม่</h2>
-            <p className="text-gray-400 mb-6">ป้อนหัวข้อที่สนใจ (เช่น 'กัญชา', 'การพนัน') หรืออัปโหลดไฟล์เพื่อสร้างรายงานข่าวกรองฉบับเต็ม</p>
+            <h2 className="text-3xl font-bold text-white mb-2">สร้างบทสรุปใหม่</h2>
+            <p className="text-base text-gray-400 mb-8">ป้อนหัวข้อที่สนใจ (เช่น 'กัญชา', 'การพนัน') หรืออัปโหลดไฟล์เพื่อสร้างรายงานข่าวกรองฉบับเต็ม</p>
             
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between items-center mb-1">
                   <label htmlFor="text-input" className="block text-sm font-medium text-gray-300">ป้อนหัวข้อหรือวางเนื้อหา</label>
                   <input type="file" ref={fileInputRef} onChange={handleFileChange} className="hidden" id="file-upload" accept=".txt,.md,.html" aria-hidden="true" />
-                  <label htmlFor="file-upload" className="flex items-center space-x-2 px-3 py-1.5 bg-gray-600/50 hover:bg-gray-600 text-gray-300 hover:text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                  <label htmlFor="file-upload" className="flex items-center space-x-2 px-4 py-2 bg-gray-600/50 hover:bg-gray-600 text-gray-300 hover:text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                     </svg>

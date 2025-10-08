@@ -90,9 +90,7 @@ const InteractiveInfographic: React.FC<{ infographicData: InfographicData }> = (
             }
         }
     };
-
-    // FIX: The type of a chart data point can be an object, which cannot be rendered by React.
-    // Ensure that credibilityScore is a number before rendering.
+    
     const credibilityScoreValue = infographicData.charts.credibilityScore.data.datasets[0].data[0];
     const credibilityScore = typeof credibilityScoreValue === 'number' ? credibilityScoreValue : 0;
 

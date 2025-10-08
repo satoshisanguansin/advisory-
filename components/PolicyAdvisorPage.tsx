@@ -58,15 +58,15 @@ const PolicyAdvisorPage: React.FC<PolicyAdvisorPageProps> = ({ onSelectReport, o
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-transparent">
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:flex flex-shrink-0">
         <Sidebar activeWorkstation={activeWorkstation} setActiveWorkstation={setActiveWorkstation} />
       </div>
 
-      <div className="flex flex-col flex-1 h-screen">
+      <div className="flex flex-col flex-1 min-h-screen">
         <Header onShowCoachMarks={onShowCoachMarks}/>
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 lg:pb-6 pb-24">
+        <main className="flex-1 overflow-y-auto p-6 sm:p-8 lg:p-10 pb-24 lg:pb-10">
             {error && <div className="mb-4 bg-red-900/50 border border-red-700 text-red-200 px-4 py-3 rounded-xl" role="alert">{error}</div>}
             <div id="workstation-hub">
               {renderContent()}

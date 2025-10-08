@@ -62,8 +62,8 @@ const ForensicWorkstation: React.FC<ForensicWorkstationProps> = ({ initialData, 
 
     return (
         <div className="flex flex-col justify-center flex-grow">
-            <h2 className="text-2xl font-bold text-white mb-1">วิเคราะห์งบประมาณเชิงลึก</h2>
-            <p className="text-gray-400 mb-6">อัปโหลดหรือวางข้อมูลจากเอกสารงบประมาณ, การจัดซื้อจัดจ้าง, หรือ TOR เพื่อให้ AI วิเคราะห์เชิงลึก เปรียบเทียบกับราคาตลาด (FMV) และระบุความผิดปกติ</p>
+            <h2 className="text-3xl font-bold text-white mb-2">วิเคราะห์งบประมาณเชิงลึก</h2>
+            <p className="text-base text-gray-400 mb-8">อัปโหลดหรือวางข้อมูลจากเอกสารงบประมาณ, การจัดซื้อจัดจ้าง, หรือ TOR เพื่อให้ AI วิเคราะห์เชิงลึก เปรียบเทียบกับราคาตลาด (FMV) และระบุความผิดปกติ</p>
             
             <div className="mb-4">
                 <label htmlFor="forensic-input" className="block text-sm font-medium text-gray-300 mb-1">ข้อมูลสำหรับวิเคราะห์</label>

@@ -11,7 +11,7 @@ if (rootElement) {
     <React.StrictMode>
       <AuthProvider>
         <App />
-      </AuthProvider>
+      </AuthProvider>Yd
     </React.StrictMode>
   );
 } else {
