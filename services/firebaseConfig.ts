@@ -3,13 +3,13 @@ import { getFirestore, Firestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration from the prompt
 const firebaseConfig = {
-  apiKey: "AIzaSyAYs0bMSqD8fPJQHWrzxoZV5iMj-mY9HxM",
-  authDomain: "people-advisor-25e86.firebaseapp.com",
-  projectId: "people-advisor-25e86",
-  storageBucket: "people-advisor-25e86.appspot.com",
-  messagingSenderId: "1098640218795",
-  appId: "1:1098640218795:web:4839c9ae37efb060db75ee",
-  measurementId: "G-Q8YJ49YPCB"
+  apiKey: "AIzaSyAYsj-mY9HxM",
+  authDomain: "people-6.firebaseapp.com",
+  projectId: "people-adv6",
+  storageBucket: "people-advis86.appspot.com",
+  messagingSenderId: "",
+  appId: "1:10989c9ae37efb060db75ee",
+  measurementId: "G-9YPCB"
 };
 
 let app: FirebaseApp | undefined;
